@@ -1,14 +1,28 @@
 .project {
   $project-border: 1px #ccc solid;
 
-  min-width: 30em;
-  max-width: 100px;
+  min-width: 20rem;
+  width: 100%;
   margin: 15px;
   border: $project-border;
   border-radius: 10px;
 
   .header {
-    margin-left: 15px;
+    $height: 2em;
+
+    height: $height;
+    line-height: $height;
+    font-size: $height;
+
+    margin: 5px 15px;
+
+    font-weight: bold;
+  }
+  input.header {
+    border: 0px;
+  }
+  input.header:focus{
+    outline: none;
   }
 
   .body {
@@ -34,6 +48,12 @@
         cursor: pointer;
 
         text-align: center;
+
+        user-select: none;
+      }
+      .todo-new.disabled {
+        opacity: 0.45;
+        cursor: default;
       }
     }
   }

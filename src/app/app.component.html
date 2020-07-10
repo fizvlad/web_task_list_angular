@@ -1,14 +1,11 @@
 <app-navbar></app-navbar>
 
 <div class="container">
-  <div *ngIf="projects.length >= 1; else noProjects">
+  <div class="projects-grid">
     <app-project
       *ngFor="let iterProject of projects"
       [project]="iterProject"
     ></app-project>
+    <app-project [project]="null"></app-project>
   </div>
-
-  <ng-template #noProjects>
-    <p>There are no projects yet!</p>
-  </ng-template>
 </div>
