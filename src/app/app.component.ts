@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   projects: Project[] = [];
 
   ngOnInit() {
-    console.debug('Loading projects from database')
+    console.debug('Loading projects from database');
     // TODO: Sample data. Should actually load from DB
     this.projects = [
       {
@@ -71,5 +71,6 @@ export class AppComponent implements OnInit {
         ]
       },
     ];
+    console.debug('Loaded projects:', this);
   }
 }
