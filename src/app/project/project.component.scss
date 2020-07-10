@@ -1,10 +1,11 @@
-$project-border: 1px #ccc solid;
-
 .project {
+  $project-border: 1px #ccc solid;
+
   min-width: 30em;
   max-width: 100px;
   margin: 15px;
   border: $project-border;
+  border-radius: 10px;
 
   .header {
     margin-left: 15px;
@@ -17,6 +18,23 @@ $project-border: 1px #ccc solid;
     .todo-list {
       list-style: none;
       line-height: 1.5em;
+
+      .todo-new {
+        $height: 2rem;
+
+        height: $height;
+        line-height: $height;
+        font-size: $height;
+
+        width: 100%;
+
+        border: $project-border;
+        border-radius: 5px;
+        border-style: dashed;
+        cursor: pointer;
+
+        text-align: center;
+      }
     }
   }
 }

@@ -1,16 +1,14 @@
 <div class="project">
   <h1 class="header">{{ project.title }}</h1>
   <div class="body">
-    <div *ngIf="project.todos.length >= 1; else noTodos" class="task-list">
+    <div class="todo-list">
       <app-todo
         *ngFor="let iterTodo of project.todos"
         [todo]="iterTodo"
         [project]="project"
       ></app-todo>
-    </div>
 
-    <ng-template #noTodos>
-      <h4>There are no tasks yet!</h4>
-    </ng-template>
+      <div class="todo-new">+</div>
+    </div>
   </div>
 </div>
