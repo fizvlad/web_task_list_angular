@@ -2,20 +2,24 @@ import { Component, Input } from '@angular/core';
 
 import { Todo } from '../todo/todo.component'
 
+import 'reflect-metadata';
+import { Type, plainToClass } from 'class-transformer';
+
 export class Project {
-  constructor(public title: string, public todos: Todo[]) {}
+  title: string;
+
+  @Type(() => Todo) // Using decorator for nested convertions
+  todos: Todo[];
+
+  constructor(title: string, todos: Todo[]) {
+    this.title = title;
+    this.todos = todos;
+  }
 }
 
 export function projectsFromDataArray(data: any[]): Project[] {
   let result: Project[] = [];
-  data.forEach((project_data) => {
-    let todos: Todo[] = [];
-    project_data['todos'].forEach((todo_data) => {
-      todos.push(new Todo(todo_data['text'], todo_data['isCompleted']));
-    });
-    let project: Project = new Project(project_data['title'], todos);
-    result.push(project);
-  });
+  data.forEach((projectData) => { result.push(plainToClass(Project, projectData)); });
   return result;
 }
 
