@@ -1,7 +1,24 @@
-<p
-  [class.todo-actual]="!todo.isCompleted"
-  [class.todo-completed]="todo.isCompleted"
->
-  <input type="checkbox" [checked]="todo.isCompleted" (change)="OnTodoStatusChange(todo, project)">
-  {{ todo.text }}
+<p class="todo-group" [class.disabled]="project == null">
+  <input
+    type="checkbox"
+    [checked]="todo != null && todo.isCompleted"
+    [disabled]="todo == null || project == null"
+    (change)="OnTodoStatusChange(todo, project)"
+  >
+  <span
+    *ngIf="todo != null; else newTodo"
+    [class.todo-actual]="todo == null || project == null || !todo.isCompleted"
+    [class.todo-completed]="todo != null && project != null && todo.isCompleted"
+  >
+    {{ todo.text }}
+  </span>
+
+  <ng-template #newTodo>
+    <input
+      type="text"
+      class="todo-actual"
+      placeholder="Новая задача"
+      [disabled]="project == null"
+    >
+  </ng-template>
 </p>

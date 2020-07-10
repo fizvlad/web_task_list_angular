@@ -10,8 +10,7 @@
         [todo]="iterTodo"
         [project]="project"
       ></app-todo>
-
-      <div [class.disabled]="project == null" class="todo-new">+</div>
+      <app-todo [todo]="null" [project]="project"></app-todo>
     </div>
   </div>
 </div>
