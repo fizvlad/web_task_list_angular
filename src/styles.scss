@@ -7,4 +7,8 @@ $regular-font-name: 'Roboto';
 body {
   font-family: $regular-font-name, sans-serif;
   margin: 0px;
+
+  .font-title {
+    font-family: $title-font-name, sans-serif;
+  }
 }
