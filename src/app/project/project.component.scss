@@ -1,5 +1,5 @@
 .project {
-  min-width: 20em;
+  min-width: 30em;
   max-width: 100px;
   margin: 15px;
   border: 1px #ccc solid;
@@ -11,5 +11,16 @@
   .task-list {
     list-style: none;
     line-height: 1.5em;
+
+    %task {
+      font-style: italic;
+    }
+    .task-actual {
+      @extend %task;
+    }
+    .task-completed {
+      @extend %task;
+      text-decoration: line-through;
+    }
   }
 }

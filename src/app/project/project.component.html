@@ -1,10 +1,14 @@
 <div class="project">
-	<h1 class="header">Project name</h1>
-	<hr>
-	<ul class="task-list">
-		<li>Task #1</li>
-    <li>Task #2</li>
-    <li>Task #3</li>
-    <li>Task #4</li>
-	</ul>
+  <h1 class="header">{{ project.title }}</h1>
+  <hr>
+  <ul class="task-list">
+    <li
+      *ngFor="let todo of project.todos; index as i"
+      [class.task-actual]="!todo.isCompleted"
+      [class.task-completed]="todo.isCompleted"
+    >
+      <input type="checkbox" [checked]="todo.isCompleted" (change)="OnTodoStatusChange(todo, project)">
+      {{ todo.text }}
+    </li>
+  </ul>
 </div>
