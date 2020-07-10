@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Project } from './project/project.component';
+import { Project, projectsFromDataArray } from './project/project.component';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     console.debug('Loading projects from database');
     // TODO: Sample data. Should actually load from DB
-    this.projects = [
+    this.projects = projectsFromDataArray([
       {
         title: 'Семья',
         todos: [
@@ -70,7 +70,7 @@ export class AppComponent implements OnInit {
           }
         ]
       },
-    ];
-    console.debug('Loaded projects:', this);
+    ]);
+    console.debug('Loaded projects:', this.projects);
   }
 }

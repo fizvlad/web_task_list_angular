@@ -2,9 +2,13 @@ import { Component, Input } from '@angular/core';
 
 import { Project } from '../project/project.component'
 
-export interface Todo {
-  text: string
-  isCompleted: boolean
+export class Todo {
+  constructor(public text: string, public isCompleted: boolean) {}
+
+  toggleCompleted(): boolean {
+    this.isCompleted = !this.isCompleted;
+    return this.isCompleted;
+  }
 }
 
 @Component({
@@ -17,7 +21,7 @@ export class TodoComponent {
   @Input() project: Project
 
   OnTodoStatusChange(todo: Todo, project: Project) {
-    todo.isCompleted = !todo.isCompleted;
+    todo.toggleCompleted();
     // TODO: Send data to server or whatever
   }
 }
