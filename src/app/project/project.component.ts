@@ -1,9 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-export interface Todo {
-  text: string
-  isCompleted: boolean
-}
+import { Todo } from '../todo/todo.component'
 
 export interface Project {
   title: string
@@ -17,9 +14,4 @@ export interface Project {
 })
 export class ProjectComponent {
   @Input() project: Project
-
-  OnTodoStatusChange(todo: Todo, project: Project) {
-    todo.isCompleted = !todo.isCompleted
-    // TODO: Send data to server or whatever
-  }
 }

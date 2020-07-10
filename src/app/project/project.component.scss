@@ -8,19 +8,8 @@
     margin-left: 15px;
   }
 
-  .task-list {
+  .todo-list {
     list-style: none;
     line-height: 1.5em;
-
-    %task {
-      font-style: italic;
-    }
-    .task-actual {
-      @extend %task;
-    }
-    .task-completed {
-      @extend %task;
-      text-decoration: line-through;
-    }
   }
 }
