@@ -1,15 +1,22 @@
+$project-border: 1px #ccc solid;
+
 .project {
   min-width: 30em;
   max-width: 100px;
   margin: 15px;
-  border: 1px #ccc solid;
+  border: $project-border;
 
   .header {
     margin-left: 15px;
   }
 
-  .todo-list {
-    list-style: none;
-    line-height: 1.5em;
+  .body {
+    padding: 20px;
+    border-top: $project-border;
+
+    .todo-list {
+      list-style: none;
+      line-height: 1.5em;
+    }
   }
 }
