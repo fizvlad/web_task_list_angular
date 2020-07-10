@@ -21,6 +21,7 @@ export class TodoComponent {
   @Input() project: Project
 
   OnTodoStatusChange(todo: Todo, project: Project) {
+    console.debug('Toggling status of', todo, 'in', project);
     todo.toggleCompleted();
     // TODO: Send data to server or whatever
   }
