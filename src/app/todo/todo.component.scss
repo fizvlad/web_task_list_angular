@@ -1,0 +1,11 @@
+%todo {
+  font-style: italic;
+  margin-left: 10px;
+}
+.todo-actual {
+  @extend %todo;
+}
+.todo-completed {
+  @extend %todo;
+  text-decoration: line-through;
+}

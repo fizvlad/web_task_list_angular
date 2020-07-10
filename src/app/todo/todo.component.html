@@ -1,0 +1,7 @@
+<p
+  [class.todo-actual]="!todo.isCompleted"
+  [class.todo-completed]="todo.isCompleted"
+>
+  <input type="checkbox" [checked]="todo.isCompleted" (change)="OnTodoStatusChange(todo, project)">
+  {{ todo.text }}
+</p>
