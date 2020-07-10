@@ -1,0 +1,16 @@
+#navbar {
+  $navbar-height: 2.5em;
+
+  width: auto;
+  height: $navbar-height;
+  line-height: $navbar-height;
+
+  border-bottom: 2px solid #ccc;
+  padding: 5px 15px;
+
+  .title {
+    margin: 0px;
+    min-width: 15em;
+    max-width: 50%;
+  }
+}
