@@ -1,6 +1,12 @@
 <div class="container">
-  <app-project
-    *ngFor="let iterProject of projects"
-    [project]="iterProject"
-  ></app-project>
+  <div *ngIf="projects.length >= 1; else noProjects">
+    <app-project
+      *ngFor="let iterProject of projects"
+      [project]="iterProject"
+    ></app-project>
+  </div>
+
+  <ng-template #noProjects>
+    <p>There are no projects yet!</p>
+  </ng-template>
 </div>
