@@ -14,11 +14,17 @@
   </span>
 
   <ng-template #newTodo>
-    <input
-      type="text"
-      class="todo-actual"
-      placeholder="Новая задача"
-      [disabled]="project == null"
+    <form
+      [formGroup]="newTodoReactiveForm"
+      (keydown)="onKeyDown($event)"
+      (submit)="onSubmit()"
     >
+      <input
+        type="text"
+        class="todo-actual font-regular"
+        placeholder="Новая задача"
+        formControlName="text"
+      >
+    </form>
   </ng-template>
 </p>
