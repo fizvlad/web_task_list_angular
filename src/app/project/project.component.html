@@ -27,7 +27,11 @@
         [todo]="iterTodo"
         [project]="project"
       ></app-todo>
-      <app-todo [todo]="null" [project]="project"></app-todo>
+      <app-todo
+        [todo]="null"
+        [project]="project"
+        (onCreateNewTodo)="onCreateNewTodo($event)"
+      ></app-todo>
     </div>
   </div>
 </div>

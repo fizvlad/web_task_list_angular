@@ -71,6 +71,12 @@ export class ProjectComponent implements OnInit {
     this.newProjectReactiveForm.reset();
   }
 
+  onCreateNewTodo(todo) {
+    console.debug('Creating new todo:', todo);
+    // TODO: Send Todo to internal API
+    this.project.todos.push(todo);
+  }
+
   private initForm() {
     this.newProjectReactiveForm = this.form_builder.group({
       title: ['', [
