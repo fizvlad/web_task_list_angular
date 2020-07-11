@@ -73,4 +73,10 @@ export class AppComponent implements OnInit {
     ]);
     console.debug('Loaded projects:', this.projects);
   }
+
+  onCreateNewProject(project) {
+    console.debug('Creating new project:', project);
+    // TODO: Send data tos server and validate that object was created
+    this.projects.push(project);
+  }
 }

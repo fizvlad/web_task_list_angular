@@ -6,6 +6,6 @@
       *ngFor="let iterProject of projects"
       [project]="iterProject"
     ></app-project>
-    <app-project [project]="null"></app-project>
+    <app-project [project]="null" (onCreateNewProject)="onCreateNewProject($event)"></app-project>
   </div>
 </div>
