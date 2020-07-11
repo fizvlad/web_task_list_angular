@@ -13,64 +13,80 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     console.debug('Loading projects from database');
+
     // TODO: Sample data. Should actually load from DB
-    this.projects = projectsFromDataArray([
+    const projectsData = [
       {
-        title: 'Семья',
+        id: 1,
+        title: "Семья",
         todos: [
           {
-            text: 'Купить молоко',
+            id: 1,
+            text: "Купить молоко",
             isCompleted: false
           },
           {
-            text: 'Заменить масло в двигателе до 23 апреля',
+            id: 2,
+            text: "Заменить масло в двигателе до 23 апреля",
             isCompleted: false
           },
           {
-            text: 'Отправить письмо бабушке',
+            id: 3,
+            text: "Отправить письмо бабушке",
             isCompleted: true
           },
           {
-            text: 'Заплатить за квартиру',
+            id: 4,
+            text: "Заплатить за квартиру",
             isCompleted: false
           },
           {
-            text: 'Забрать обувь из ремонта',
+            id: 5,
+            text: "Забрать обувь из ремонта",
             isCompleted: false
           }
         ]
       },
       {
-        title: 'Работа',
+        id: 2,
+        title: "Работа",
         todos: [
           {
-            text: 'Позвонить заказчику',
+            id: 6,
+            text: "Позвонить заказчику",
             isCompleted: true
           },
           {
-            text: 'Отправить документы',
+            id: 7,
+            text: "Отправить документы",
             isCompleted: true
           },
           {
-            text: 'Заполнить отчет',
+            id: 8,
+            text: "Заполнить отчет",
             isCompleted: false
           }
         ]
       },
       {
-        title: 'Прочее',
+        id: 3,
+        title: "Прочее",
         todos: [
           {
-            text: 'Позвонить другу',
+            id: 9,
+            text: "Позвонить другу",
             isCompleted: false
           },
           {
-            text: 'Подготовиться к поездке',
+            id: 10,
+            text: "Подготовиться к поездке",
             isCompleted: false
           }
         ]
-      },
-    ]);
+      }
+    ];
+
+    this.projects = projectsFromDataArray(projectsData);
     console.debug('Loaded projects:', this.projects);
   }
 
