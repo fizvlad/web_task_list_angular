@@ -6,6 +6,8 @@ import { Type, plainToClass } from 'class-transformer';
 
 import { Project } from '../project/project.component'
 
+import { TodoService } from '../services/todo.service';
+
 export class Todo {
   constructor(public id: number, public text: string, public isCompleted: boolean) {}
 
@@ -27,7 +29,7 @@ export class TodoComponent {
 
   newTodoReactiveForm: FormGroup;
 
-  constructor(private form_builder: FormBuilder) { }
+  constructor(private form_builder: FormBuilder, private todoService: TodoService) { }
 
   ngOnInit() {
     this.initForm();
@@ -36,7 +38,12 @@ export class TodoComponent {
   onTodoStatusChange(todo: Todo, project: Project) {
     console.debug('Toggling status of', todo, 'in', project);
     todo.toggleCompleted();
-    // TODO: Send data to server or whatever
+    this.todoService.patchTodo(todo, this.project).subscribe(response => {
+      // Everything is fine
+    }, error => {
+      todo.toggleCompleted(); // Revert
+      console.error(error);
+    });
   }
 
   isControlInvalid(controlName: string): boolean {

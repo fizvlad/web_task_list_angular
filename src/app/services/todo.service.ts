@@ -25,4 +25,11 @@ export class TodoService {
       {observe: 'response'}
     );
   }
+
+  public patchTodo(todo: Todo, project: Project): Observable<HttpResponse<any>> {
+    return this.httpClient.patch<any>(
+      `${this.INTERNAL_API_URL}/projects/${project.id}/todo/${todo.id}`,
+      Object.assign(todo, {project_id: project.id})
+    );
+  }
 }
