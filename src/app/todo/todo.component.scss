@@ -7,9 +7,12 @@
   .todo-actual {
     @extend %todo;
   }
+  form {
+    display:inline;
+  }
   input.todo-actual {
     border: 0px;
-    padding-left: 5px;
+    padding-left: 4px;
 
     font-size: 1.0em;
   }
