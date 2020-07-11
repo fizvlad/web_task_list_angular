@@ -17,8 +17,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     console.debug('Loading projects from database');
-    this.projectService.getProjects().subscribe(value => {
-      this.projects = projectsFromDataArray(value);
+    this.projectService.getProjects().subscribe(data => {
+      this.projects = projectsFromDataArray(data);
     console.debug('Loaded projects:', this.projects);
     }, error => {
       console.error(error);
@@ -28,7 +28,16 @@ export class AppComponent implements OnInit {
   onCreateNewProject(project) {
     console.debug('Creating new project:', project);
     let data = projectToData(project);
-    this.projectService.postProject(data).subscribe(value => {
+    this.projectService.postProject(data).subscribe(response => {
+      let location: string;
+      let new_id: number;
+      try {
+        location = response.headers.get('location');
+        new_id = +location.match(/\/projects\/(\d+)/)[1];
+      } catch {
+        console.error('Failed to retrieve new id from', response);
+      }
+      project.id = new_id;
       this.projects.push(project);
     }, error => {
       console.error(error);
