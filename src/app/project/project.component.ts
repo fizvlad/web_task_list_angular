@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import 'reflect-metadata';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, classToPlain } from 'class-transformer';
 
 import { Todo } from '../todo/todo.component'
 
@@ -24,6 +24,10 @@ export function projectsFromDataArray(data: any[]): Project[] {
   let result: Project[] = [];
   data.forEach((projectData) => { result.push(plainToClass(Project, projectData)); });
   return result;
+}
+
+export function projectToData(project: Project): any {
+  return classToPlain(project);
 }
 
 @Component({
