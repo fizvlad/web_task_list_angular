@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Project, projectsFromDataArray } from './project/project.component';
+import { Project, projectsFromDataArray, projectToData } from './project/project.component';
 
 import { ProjectService } from './services/project.service';
 
@@ -27,7 +27,11 @@ export class AppComponent implements OnInit {
 
   onCreateNewProject(project) {
     console.debug('Creating new project:', project);
-    // TODO: Send data tos server and validate that object was created
-    this.projects.push(project);
+    let data = projectToData(project);
+    this.projectService.postProject(data).subscribe(value => {
+      this.projects.push(project);
+    }, error => {
+      console.error(error);
+    });
   }
 }
