@@ -6,22 +6,46 @@
   border: $project-border;
   border-radius: 10px;
 
+  position: relative;
+
   .header {
     $height: 2em;
+    $x-margin: 15px;
 
-    height: $height;
     line-height: $height;
     font-size: $height;
 
-    margin: 5px 15px;
+    width: calc(100% - 2 * #{$x-margin});
+
+    margin: 5px $x-margin;
 
     font-weight: bold;
+    overflow-wrap: anywhere;
   }
   input.header {
     border: 0px;
   }
   input.header:focus{
     outline: none;
+  }
+  input.header.ng-touched.ng-invalid {
+    color: #c00;
+  }
+  div.header-error {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+
+    min-width: 10rem;
+    width: 40%;
+
+    border: $project-border;
+    border-radius: 5px;
+    padding:5px;
+
+    background-color: #ccc;
+
+    z-index: 1;
   }
 
   .body {

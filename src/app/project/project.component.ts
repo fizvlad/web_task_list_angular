@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Todo } from '../todo/todo.component'
 
@@ -28,6 +29,53 @@ export function projectsFromDataArray(data: any[]): Project[] {
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.scss']
 })
-export class ProjectComponent {
+export class ProjectComponent implements OnInit {
   @Input() project: Project
+  @Output() onCreateNewProject = new EventEmitter();
+
+  newProjectReactiveForm: FormGroup;
+
+  constructor(private form_builder: FormBuilder) { }
+
+  ngOnInit() {
+    this.initForm();
+  }
+
+  isControlInvalid(controlName: string): boolean {
+    let control = this.newProjectReactiveForm.controls[controlName];
+    return control.invalid && control.touched;
+  }
+
+  onKeyDown(event) {
+    if (event.keyCode === 13) {
+      this.onSubmit();
+    }
+  }
+
+  onSubmit() {
+    let controls = this.newProjectReactiveForm.controls;
+
+    // Mark all of controls as touched
+    if (this.newProjectReactiveForm.invalid) {
+      Object.keys(controls).forEach(controlName => controls[controlName].markAsTouched());
+      return;
+    }
+
+    let newProject = new Project(this.newProjectReactiveForm.value['title'], []);
+    this.onCreateNewProject.emit(newProject);
+
+    document.getElementById('newProjectTitleInput').blur();
+
+    this.newProjectReactiveForm.reset();
+  }
+
+  private initForm() {
+    this.newProjectReactiveForm = this.form_builder.group({
+      title: ['', [
+          Validators.required,
+          Validators.pattern(/[A-zА-я\d\s]+/)
+        ]
+      ]
+    });
+  }
 }
