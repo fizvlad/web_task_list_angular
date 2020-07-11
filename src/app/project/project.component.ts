@@ -6,6 +6,8 @@ import { Type, plainToClass, classToPlain } from 'class-transformer';
 
 import { Todo } from '../todo/todo.component'
 
+import { TodoService } from '../services/todo.service';
+
 export class Project {
   id: number;
   title: string;
@@ -41,7 +43,7 @@ export class ProjectComponent implements OnInit {
 
   newProjectReactiveForm: FormGroup;
 
-  constructor(private form_builder: FormBuilder) { }
+  constructor(private form_builder: FormBuilder, private todoService: TodoService) { }
 
   ngOnInit() {
     this.initForm();
@@ -79,8 +81,20 @@ export class ProjectComponent implements OnInit {
 
   onCreateNewTodo(todo) {
     console.debug('Creating new todo:', todo);
-    // TODO: Send Todo to internal API
-    this.project.todos.push(todo);
+    this.todoService.postTodo(todo, this.project).subscribe(response => {
+      let location: string;
+      let new_id: number;
+      try {
+        location = response.headers.get('location');
+        new_id = +location.match(/\/todos\/(\d+)/)[1];
+      } catch {
+        console.error('Failed to retrieve new id from', response);
+      }
+      todo.id = new_id;
+      this.project.todos.push(todo);
+    }, error => {
+      console.error(error);
+    });
   }
 
   private initForm() {
