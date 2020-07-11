@@ -64,7 +64,9 @@ export class ProjectComponent implements OnInit {
     let newProject = new Project(this.newProjectReactiveForm.value['title'], []);
     this.onCreateNewProject.emit(newProject);
 
-    document.getElementById('newProjectTitleInput').blur();
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
 
     this.newProjectReactiveForm.reset();
   }
