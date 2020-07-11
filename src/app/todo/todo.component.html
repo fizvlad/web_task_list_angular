@@ -3,7 +3,7 @@
     type="checkbox"
     [checked]="todo != null && todo.isCompleted"
     [disabled]="todo == null || project == null"
-    (change)="OnTodoStatusChange(todo, project)"
+    (change)="onTodoStatusChange(todo, project)"
   >
   <span
     *ngIf="todo != null; else newTodo"
