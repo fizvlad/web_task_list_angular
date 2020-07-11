@@ -1,10 +1,10 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { Todo } from '../todo/todo.component'
-
 import 'reflect-metadata';
 import { Type, plainToClass } from 'class-transformer';
+
+import { Todo } from '../todo/todo.component'
 
 export class Project {
   title: string;
