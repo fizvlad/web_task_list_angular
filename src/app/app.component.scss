@@ -1,5 +1,5 @@
 .container {
-  margin: auto;
+  margin: 15px auto;
   width: 90%;
 
   .projects-grid {
@@ -7,5 +7,6 @@
     display: inline-grid;
     grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
     grid-column-gap: 20px;
+    grid-row-gap: 20px;
   }
 }

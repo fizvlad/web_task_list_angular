@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Project, projectsFromDataArray } from './project/project.component';
+import { Project, projectsFromDataArray, projectToData } from './project/project.component';
+
+import { ProjectService } from './services/project.service';
 
 @Component({
   selector: 'app-root',
@@ -11,66 +13,34 @@ export class AppComponent implements OnInit {
   title: string = 'web-task-list-angular';
   projects: Project[] = [];
 
+  constructor(private projectService: ProjectService) {}
+
   ngOnInit() {
     console.debug('Loading projects from database');
-    // TODO: Sample data. Should actually load from DB
-    this.projects = projectsFromDataArray([
-      {
-        title: 'Семья',
-        todos: [
-          {
-            text: 'Купить молоко',
-            isCompleted: false
-          },
-          {
-            text: 'Заменить масло в двигателе до 23 апреля',
-            isCompleted: false
-          },
-          {
-            text: 'Отправить письмо бабушке',
-            isCompleted: true
-          },
-          {
-            text: 'Заплатить за квартиру',
-            isCompleted: false
-          },
-          {
-            text: 'Забрать обувь из ремонта',
-            isCompleted: false
-          }
-        ]
-      },
-      {
-        title: 'Работа',
-        todos: [
-          {
-            text: 'Позвонить заказчику',
-            isCompleted: true
-          },
-          {
-            text: 'Отправить документы',
-            isCompleted: true
-          },
-          {
-            text: 'Заполнить отчет',
-            isCompleted: false
-          }
-        ]
-      },
-      {
-        title: 'Прочее',
-        todos: [
-          {
-            text: 'Позвонить другу',
-            isCompleted: false
-          },
-          {
-            text: 'Подготовиться к поездке',
-            isCompleted: false
-          }
-        ]
-      },
-    ]);
+    this.projectService.getProjects().subscribe(data => {
+      this.projects = projectsFromDataArray(data);
     console.debug('Loaded projects:', this.projects);
+    }, error => {
+      console.error(error);
+    });
+  }
+
+  onCreateNewProject(project) {
+    console.debug('Creating new project:', project);
+    let data = projectToData(project);
+    this.projectService.postProject(data).subscribe(response => {
+      let location: string;
+      let new_id: number;
+      try {
+        location = response.headers.get('location');
+        new_id = +location.match(/\/projects\/(\d+)/)[1];
+      } catch {
+        console.error('Failed to retrieve new id from', response);
+      }
+      project.id = new_id;
+      this.projects.push(project);
+    }, error => {
+      console.error(error);
+    });
   }
 }

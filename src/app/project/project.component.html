@@ -1,7 +1,24 @@
 <div class="project">
-  <h1 *ngIf="project != null; else newProjectTitle" class="header font-title">{{ project.title }}</h1>
+  <h1 *ngIf="project != null; else newProjectTitle" class="header font-title">
+    {{ project.title }}
+  </h1>
   <ng-template #newProjectTitle>
-    <input type="text" class="header font-title" placeholder="Новая категория">
+    <form
+      [formGroup]="newProjectReactiveForm"
+      (keydown)="onKeyDown($event)"
+      (submit)="onSubmit()"
+    >
+      <input
+        type="text"
+        id="newProjectTitleInput"
+        class="header font-title"
+        placeholder="Новый проект"
+        formControlName="title"
+      >
+      <div class="header-error" *ngIf="isControlInvalid('title')">
+        Название проекта должно состоять лишь из букв, цифр и пробелов
+      </div>
+    </form>
   </ng-template>
   <div class="body">
     <div class="todo-list">
@@ -10,8 +27,11 @@
         [todo]="iterTodo"
         [project]="project"
       ></app-todo>
-
-      <div [class.disabled]="project == null" class="todo-new">+</div>
+      <app-todo
+        [todo]="null"
+        [project]="project"
+        (onCreateNewTodo)="onCreateNewTodo($event)"
+      ></app-todo>
     </div>
   </div>
 </div>
