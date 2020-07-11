@@ -7,12 +7,14 @@ import { Type, plainToClass } from 'class-transformer';
 import { Todo } from '../todo/todo.component'
 
 export class Project {
+  id: number;
   title: string;
 
   @Type(() => Todo) // Using decorator for nested convertions
   todos: Todo[];
 
-  constructor(title: string, todos: Todo[]) {
+  constructor(id: number, title: string, todos: Todo[]) {
+    this.id = id;
     this.title = title;
     this.todos = todos;
   }
@@ -61,7 +63,7 @@ export class ProjectComponent implements OnInit {
       return;
     }
 
-    let newProject = new Project(this.newProjectReactiveForm.value['title'], []);
+    let newProject = new Project(undefined, this.newProjectReactiveForm.value['title'], []);
     this.onCreateNewProject.emit(newProject);
 
     if (document.activeElement instanceof HTMLElement) {

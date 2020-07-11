@@ -7,7 +7,7 @@ import { Type, plainToClass } from 'class-transformer';
 import { Project } from '../project/project.component'
 
 export class Todo {
-  constructor(public text: string, public isCompleted: boolean) {}
+  constructor(public id: number, public text: string, public isCompleted: boolean) {}
 
   toggleCompleted(): boolean {
     this.isCompleted = !this.isCompleted;
@@ -59,7 +59,7 @@ export class TodoComponent {
       return;
     }
 
-    let newTodo = new Todo(this.newTodoReactiveForm.value['text'], false);
+    let newTodo = new Todo(undefined, this.newTodoReactiveForm.value['text'], false);
     this.onCreateNewTodo.emit(newTodo);
 
     if (document.activeElement instanceof HTMLElement) {
