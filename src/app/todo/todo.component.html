@@ -2,13 +2,13 @@
   <input
     type="checkbox"
     [checked]="todo != null && todo.isCompleted"
-    [disabled]="todo == null || project == null"
-    (change)="onTodoStatusChange(todo, project)"
+    [disabled]="todo == null || todo.projectId == null"
+    (change)="onTodoStatusChange(todo)"
   >
   <span
     *ngIf="todo != null; else newTodo"
-    [class.todo-actual]="todo == null || project == null || !todo.isCompleted"
-    [class.todo-completed]="todo != null && project != null && todo.isCompleted"
+    [class.todo-actual]="todo == null || todo.projectId == null || !todo.isCompleted"
+    [class.todo-completed]="todo != null && todo.projectId != null && todo.isCompleted"
   >
     {{ todo.text }}
   </span>

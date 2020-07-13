@@ -81,7 +81,7 @@ export class ProjectComponent implements OnInit {
 
   onCreateNewTodo(todo) {
     console.debug('Creating new todo:', todo);
-    this.todoService.postTodo(todo, this.project).subscribe(response => {
+    this.todoService.postTodo(todo).subscribe(response => {
       let location: string;
       let new_id: number;
       try {
