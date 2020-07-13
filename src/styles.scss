@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+$icon-font-path: '~open-iconic/font/fonts/';
+@import "~open-iconic/font/css/open-iconic-bootstrap.scss";
 
 $title-font-name: 'Ubuntu';
 $regular-font-name: 'Roboto';
