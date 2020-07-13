@@ -16,6 +16,10 @@ export class AppComponent implements OnInit {
   constructor(private projectService: ProjectService) {}
 
   ngOnInit() {
+    this.reloadProjectsList();
+  }
+
+  reloadProjectsList() {
     console.debug('Loading projects from database');
     this.projectService.getProjects().subscribe(data => {
       this.projects = projectsFromDataArray(data);
@@ -28,6 +32,11 @@ export class AppComponent implements OnInit {
   projectTrackByFn(index: number, project: Project): any {
     project.id
   }
+
+  onReloadButtonClick() {
+    this.reloadProjectsList();
+  }
+
   onCreateNewProject(project) {
     console.debug('Creating new project:', project);
     let data = projectToData(project);

@@ -9,8 +9,15 @@
   padding: 5px 15px;
 
   .title {
+    display: inline;
+
     margin: 0px;
     min-width: 15em;
     max-width: 50%;
+  }
+
+  .reload {
+    float: right;
+    cursor: pointer;
   }
 }
