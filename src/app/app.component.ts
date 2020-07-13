@@ -25,6 +25,9 @@ export class AppComponent implements OnInit {
     });
   }
 
+  projectTrackByFn(index: number, project: Project): any {
+    project.id
+  }
   onCreateNewProject(project) {
     console.debug('Creating new project:', project);
     let data = projectToData(project);

@@ -49,6 +49,10 @@ export class ProjectComponent implements OnInit {
     this.initForm();
   }
 
+  todoTrackByFn(index: number, todo: Todo): any {
+    todo.id
+  }
+
   isControlInvalid(controlName: string): boolean {
     let control = this.newProjectReactiveForm.controls[controlName];
     return control.invalid && control.touched;
