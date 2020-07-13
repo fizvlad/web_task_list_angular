@@ -31,8 +31,8 @@ export class AppComponent implements OnInit {
     });
   }
 
-  projectTrackByFn(index: number, project: Project): any {
-    project.id
+  projectTrackByFn(index: number, project: Project): number {
+    return project.id;
   }
 
   onReloadButtonClick() {

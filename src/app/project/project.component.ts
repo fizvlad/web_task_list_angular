@@ -39,8 +39,8 @@ export class ProjectComponent implements OnInit {
     this.initForm();
   }
 
-  todoTrackByFn(index: number, todo: Todo): any {
-    todo.id
+  todoTrackByFn(index: number, todo: Todo): number {
+    return todo.id;
   }
 
   isControlInvalid(controlName: string): boolean {
