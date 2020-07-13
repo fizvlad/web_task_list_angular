@@ -22,16 +22,6 @@ export class Project {
   }
 }
 
-export function projectsFromDataArray(data: any[]): Project[] {
-  let result: Project[] = [];
-  data.forEach((projectData) => { result.push(plainToClass(Project, projectData)); });
-  return result;
-}
-
-export function projectToData(project: Project): any {
-  return classToPlain(project);
-}
-
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
