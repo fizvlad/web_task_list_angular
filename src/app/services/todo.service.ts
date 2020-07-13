@@ -16,17 +16,17 @@ export class TodoService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public postTodo(todo: Todo): Observable<HttpResponse<any>> {
+  public postTodo(todo: Todo): Observable<HttpResponse<void>> {
     // NOTE: Observing HttpResponse since Location header should contain important info
-    return this.httpClient.post<any>(
+    return this.httpClient.post<void>(
       `${this.INTERNAL_API_URL}/todos`,
       classToPlain(todo),
       {observe: 'response'}
     );
   }
 
-  public patchTodo(todo: Todo): Observable<HttpResponse<any>> {
-    return this.httpClient.patch<any>(
+  public patchTodo(todo: Todo): Observable<object> {
+    return this.httpClient.patch<object>(
       `${this.INTERNAL_API_URL}/projects/${todo.projectId}/todo/${todo.id}`,
       classToPlain(todo)
     );

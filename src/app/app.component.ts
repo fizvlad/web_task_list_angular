@@ -41,8 +41,7 @@ export class AppComponent implements OnInit {
 
   onCreateNewProject(project) {
     console.debug('Creating new project:', project);
-    let data = classToPlain(project);
-    this.projectService.postProject(data).subscribe(response => {
+    this.projectService.postProject(project).subscribe(response => {
       let location: string;
       let new_id: number;
       try {
