@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Project, projectsFromDataArray, projectToData } from './project/project.component';
+import { plainToClass, classToPlain } from 'class-transformer';
+
+import { Project } from './project/project.component';
 
 import { ProjectService } from './services/project.service';
 
@@ -16,19 +18,30 @@ export class AppComponent implements OnInit {
   constructor(private projectService: ProjectService) {}
 
   ngOnInit() {
+    this.reloadProjectsList();
+  }
+
+  reloadProjectsList() {
     console.debug('Loading projects from database');
     this.projectService.getProjects().subscribe(data => {
-      this.projects = projectsFromDataArray(data);
+      this.projects = data.map(d => plainToClass(Project, d));
     console.debug('Loaded projects:', this.projects);
     }, error => {
       console.error(error);
     });
   }
 
+  projectTrackByFn(index: number, project: Project): number {
+    return project.id;
+  }
+
+  onReloadButtonClick() {
+    this.reloadProjectsList();
+  }
+
   onCreateNewProject(project) {
     console.debug('Creating new project:', project);
-    let data = projectToData(project);
-    this.projectService.postProject(data).subscribe(response => {
+    this.projectService.postProject(project).subscribe(response => {
       let location: string;
       let new_id: number;
       try {

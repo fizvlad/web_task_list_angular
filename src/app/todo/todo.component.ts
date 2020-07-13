@@ -2,14 +2,31 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import 'reflect-metadata';
-import { Type, plainToClass } from 'class-transformer';
+import { Expose, plainToClass } from 'class-transformer';
 
 import { Project } from '../project/project.component'
 
 import { TodoService } from '../services/todo.service';
 
 export class Todo {
-  constructor(public id: number, public text: string, public isCompleted: boolean) {}
+  id: number;
+  text: string;
+  isCompleted: boolean;
+
+  @Expose({ name: "project_id" })
+  projectId: number;
+
+  constructor(
+    id: number,
+    text: string,
+    isCompleted: boolean,
+    projectId: number
+  ) {
+    this.id = id;
+    this.text = text;
+    this.isCompleted = isCompleted;
+    this.projectId = projectId;
+  }
 
   toggleCompleted(): boolean {
     this.isCompleted = !this.isCompleted;
@@ -35,10 +52,10 @@ export class TodoComponent {
     this.initForm();
   }
 
-  onTodoStatusChange(todo: Todo, project: Project) {
-    console.debug('Toggling status of', todo, 'in', project);
+  onTodoStatusChange(todo: Todo) {
+    console.debug('Toggling status of', todo);
     todo.toggleCompleted();
-    this.todoService.patchTodo(todo, this.project).subscribe(response => {
+    this.todoService.patchTodo(todo).subscribe(response => {
       // Everything is fine
     }, error => {
       todo.toggleCompleted(); // Revert
@@ -66,7 +83,7 @@ export class TodoComponent {
       return;
     }
 
-    let newTodo = new Todo(undefined, this.newTodoReactiveForm.value['text'], false);
+    let newTodo = new Todo(undefined, this.newTodoReactiveForm.value['text'], false, this.project.id);
     this.onCreateNewTodo.emit(newTodo);
 
     if (document.activeElement instanceof HTMLElement) {

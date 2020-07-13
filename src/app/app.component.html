@@ -1,9 +1,9 @@
-<app-navbar></app-navbar>
+<app-navbar (onReloadButtonClick)="onReloadButtonClick()"></app-navbar>
 
 <div class="container">
   <div class="projects-grid">
     <app-project
-      *ngFor="let iterProject of projects"
+      *ngFor="let iterProject of projects; trackBy: projectTrackByFn"
       [project]="iterProject"
     ></app-project>
     <app-project [project]="null" (onCreateNewProject)="onCreateNewProject($event)"></app-project>

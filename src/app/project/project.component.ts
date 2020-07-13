@@ -22,16 +22,6 @@ export class Project {
   }
 }
 
-export function projectsFromDataArray(data: any[]): Project[] {
-  let result: Project[] = [];
-  data.forEach((projectData) => { result.push(plainToClass(Project, projectData)); });
-  return result;
-}
-
-export function projectToData(project: Project): any {
-  return classToPlain(project);
-}
-
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -47,6 +37,10 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+  }
+
+  todoTrackByFn(index: number, todo: Todo): number {
+    return todo.id;
   }
 
   isControlInvalid(controlName: string): boolean {
@@ -81,7 +75,7 @@ export class ProjectComponent implements OnInit {
 
   onCreateNewTodo(todo) {
     console.debug('Creating new todo:', todo);
-    this.todoService.postTodo(todo, this.project).subscribe(response => {
+    this.todoService.postTodo(todo).subscribe(response => {
       let location: string;
       let new_id: number;
       try {
