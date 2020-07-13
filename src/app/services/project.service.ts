@@ -2,6 +2,7 @@ import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import { classToPlain } from 'class-transformer';
 
 import { environment } from 'src/environments/environment'
 
@@ -21,6 +22,6 @@ export class ProjectService {
 
   public postProject(project: Project): Observable<HttpResponse<any>> {
     // NOTE: Observing HttpResponse since Location header should contain important info
-    return this.httpClient.post<any>(`${this.INTERNAL_API_URL}/projects`, project, {observe: 'response'});
+    return this.httpClient.post<any>(`${this.INTERNAL_API_URL}/projects`, classToPlain(project), {observe: 'response'});
   }
 }
